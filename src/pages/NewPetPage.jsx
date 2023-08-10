@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import backgroundRegister from '../images/dog6.jpg'
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function NewPetPage(){
     const navigate = useNavigate();
@@ -16,6 +17,9 @@ export default function NewPetPage(){
 
         try {
             await axios.post(`${import.meta.env.VITE_API_URL}/newpet`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
                 petName,
                 about,
                 image
@@ -57,7 +61,7 @@ export default function NewPetPage(){
                     ></input>
                 </label>
                 <button type="submit" onClick={handleSubmit}>
-                    Finalizar cadastro
+                    <Link to="/">Finalizar cadastro</Link>
                 </button>
             </Forms>
         </PageContainer>
@@ -108,5 +112,9 @@ const Forms = styled.form`
         font-size: 40px;
         color: #f3b65b;
         text-shadow: 2px 2px 2px #000000;
+    }
+    a {
+        text-decoration: none;
+        color: black;
     }
 `;

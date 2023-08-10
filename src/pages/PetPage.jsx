@@ -5,7 +5,11 @@ import FixedMenu from '../components/Menu.jsx';
 export default function PetPage(){
     const [ petId, setPetId ] = useState([]);
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/pets/:id`)
+        axios.get(`${import.meta.env.VITE_API_URL}/pets/:id`), {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
             .then(response => {
                 setPetId(response.data);
             })
@@ -23,7 +27,7 @@ export default function PetPage(){
     )
 }
 
-const HomeContainer = styled.div`
+const PageContainer = styled.div`
     width: 100%;
     height: 100vh;
     background-color: #F4F0EB;

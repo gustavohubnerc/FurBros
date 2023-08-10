@@ -1,11 +1,15 @@
 import { useNavigate } from "react-router-dom"
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
 import backgroundLogin from '../images/dog6.jpg'
+import AuthContext from "../contexts/AuthContext"
+
 
 export default function LoginPage() {
     const navigate = useNavigate();
+    const authContext = useContext(AuthContext);
+    const { setToken } = authContext;
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -13,11 +17,16 @@ export default function LoginPage() {
     const handleSignIn = async (e) => {
         e.preventDefault();
 
-        try {
-            await axios.post(`${import.meta.env.VITE_API_URL}/signin`, {
+         try {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/signin`, {
                 email,
                 password
-            })
+            });
+
+            const token = response.data.token;
+            setToken(token);
+            localStorage.setItem("token", token);
+
             navigate("/"); 
         } catch (error) {
             if (error.response.status === 401) {

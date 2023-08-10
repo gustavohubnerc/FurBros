@@ -8,7 +8,11 @@ export default function ProfilePage() {
     const [userPetIds, setUserPetIds] = useState([]);
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/profile`)
+        axios.get(`${import.meta.env.VITE_API_URL}/profile`), {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
             .then(response => {
                 setUserPetIds(response.data);
             })

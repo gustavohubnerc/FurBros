@@ -4,7 +4,8 @@ import LoginPage from "./pages/LoginPage"
 import HomePage from "./pages/HomePage"
 import NewPetPage from "./pages/NewPetPage"
 import ProfilePage from "./pages/ProfilePage"
-import AuthContext from "./context/AuthContext"
+import AuthContext from "./contexts/AuthContext.jsx"
+import { useState } from "react"
 
 export default function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));

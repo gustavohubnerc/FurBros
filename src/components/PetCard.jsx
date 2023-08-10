@@ -1,34 +1,17 @@
-import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 
-export default function PetCard({ petId }) {
-    const [petData, setPetData] = useState(null);
 
-    useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/pets/${petId}`)
-            .then(response => {
-                setPetData(response.data);
-            })
-            .catch(error => {
-                console.error('Erro ao obter dados do animal de estimação:', error);
-            });
-    }, [petId]);
-
-    if (!petData) {
-        return <LoadingMessage>Carregando...</LoadingMessage>;
-    }
-
-    const { imageUrl, name, description, phone } = petData;
+export default function PetCard({ pet }) {
+    const { petName, image, about, phone } = pet;
 
     return (
         <CardContainer>
             <ImageContainer>
-                <CardImage src={imageUrl} alt={name} />
+                <CardImage src={image} alt={petName} />
             </ImageContainer>
             <InfoContainer>
-                <Name>{name}</Name>
-                <Description>{description}</Description>
+                <Name>{petName}</Name>
+                <Description>{about}</Description>
                 <Phone>{phone}</Phone>
             </InfoContainer>
         </CardContainer>
@@ -42,6 +25,8 @@ const CardContainer = styled.div`
     border: 1px solid #ccc;
     border-radius: 8px;
     margin: 8px;
+    background-color: #F4F0EB;
+    font-family: 'Poppins', sans-serif;
 `;
 
 const ImageContainer = styled.div`
@@ -62,12 +47,14 @@ const InfoContainer = styled.div`
 
 const Name = styled.div`
     font-weight: bold;
-    font-size: 18px;
+    font-size: 25px;
     margin-bottom: 8px;
+    color: #f3b65b;
+    text-shadow: 2px 2px 2px #000000;
 `;
 
 const Description = styled.div`
-    font-size: 14px;
+    font-size: 12px;
     margin-bottom: 8px;
 `;
 

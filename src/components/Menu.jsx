@@ -1,32 +1,36 @@
 import styled from "styled-components"
 import logo from "../images/FurBros.png"
+import { Link } from "react-router-dom"
 
 export default function FixedMenu() {
+    const redirectToHome = () => {
+        window.location.href = '/';
+    };
 
     return (
         <Menu>
-            <ImageText>
-                <img src={logo}></img>
-            </ImageText>
-            <ImageText>
-                <button>Novo pet</button>
-            </ImageText>  
-            <ImageText>
-                <button>Meu perfil</button>
-            </ImageText>            
+            <Content onClick={redirectToHome}>
+                <img alt="logo" src={logo}/>
+            </Content>
+            <Content>
+                <button><Link to="/newpet">Novo pet</Link></button>
+            </Content>  
+            <Content>
+                <button><Link to="/profile">Meu perfil</Link></button>
+            </Content>            
         </Menu>
     )
 }
 
 const Menu = styled.div`
-    height: 110px;
+    height: 100px;
     width: 100%;
     display: flex;
     justify-content: space-between;
+    background-color: #F4F0EB;
 `
 
-const ImageText = styled.div`
-    height: 85px;
+const Content = styled.div`
     display: flex;
 
     button {
@@ -38,5 +42,10 @@ const ImageText = styled.div`
         color: #f3b65b;
         background-color: transparent;
         padding: 10px;
+        text-decoration: none;
+    }
+    a {
+        text-decoration: none;
+        color: #f3b65b;
     }
 ` 
