@@ -2,8 +2,15 @@ import styled from 'styled-components';
 
 
 export default function PetCard({ pet }) {
-    const { petName, image, about, phone } = pet;
+    console.log(pet); 
 
+    const { petName, image, about, phoneInfo } = pet;
+
+    const formatPhone = (phone) => {
+        return phone.replace(/(\d{2})(\d{5})(\d{4})/, "($1)$2-$3");
+    };
+       
+    
     return (
         <CardContainer>
             <ImageContainer>
@@ -12,19 +19,20 @@ export default function PetCard({ pet }) {
             <InfoContainer>
                 <Name>{petName}</Name>
                 <Description>{about}</Description>
-                <Phone>{phone}</Phone>
+                <Phone>Tel: {formatPhone(phoneInfo)}</Phone>
             </InfoContainer>
         </CardContainer>
     );
 }
 
 const CardContainer = styled.div`
+    width: 88%;
+    height: 140px;
     display: flex;
     align-items: center;
     padding: 16px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    margin: 8px;
     background-color: #F4F0EB;
     font-family: 'Poppins', sans-serif;
 `;
@@ -47,10 +55,9 @@ const InfoContainer = styled.div`
 
 const Name = styled.div`
     font-weight: bold;
-    font-size: 25px;
+    font-size: 21px;
     margin-bottom: 8px;
     color: #f3b65b;
-    text-shadow: 2px 2px 2px #000000;
 `;
 
 const Description = styled.div`
@@ -59,8 +66,8 @@ const Description = styled.div`
 `;
 
 const Phone = styled.div`
-    font-size: 14px;
-    color: #555;
+    font-size: 11px;
+    color: green;
 `;
 
 const LoadingMessage = styled.div`

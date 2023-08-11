@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage"
 import HomePage from "./pages/HomePage"
 import NewPetPage from "./pages/NewPetPage"
 import ProfilePage from "./pages/ProfilePage"
+import PetPage from "./pages/PetPage"
 import AuthContext from "./contexts/AuthContext.jsx"
 import { useState } from "react"
 
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/newpet" element={<NewPetPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/pets/:id" element={<PetPage />} />
         </Routes>
       </BrowserRouter>
       </AuthContext.Provider>

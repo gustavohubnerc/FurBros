@@ -106,6 +106,9 @@ const Forms = styled.form`
         border: none;
         font-family: 'Poppins', sans-serif;
     }
+    input::placeholder {
+        padding-left: 10px;
+    }
     button {
         margin: 10px;
         width: 300px;

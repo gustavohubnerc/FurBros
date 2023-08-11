@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import PetCard from '../components/PetCard';
@@ -17,6 +18,7 @@ export default function HomePage() {
             }
         })
             .then(response => {
+                console.log(response.data);
                 setPets(response.data);
             })
             .catch(error => {
@@ -27,15 +29,38 @@ export default function HomePage() {
     return (
         <HomeContainer>
             <FixedMenu />
-            {pets.map(pet => (
-                <PetCard key={pet.id} pet={pet} />
-            ))}
+            <PetCardList>
+                {pets.map(pet => (
+                    <PetCardLink to={`/pets/${pet.id}`} key={pet.id}>
+                        <PetCard pet={pet} />
+                    </PetCardLink>
+                ))}
+            </PetCardList>
         </HomeContainer>
     );
 }
 
 const HomeContainer = styled.div`
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-color: #F3B555;
+`;
+
+const PetCardList = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+`;
+
+const PetCardLink = styled(Link)`
+    text-decoration: none;
+    color: inherit;
+    margin: 10px;
+    transition: transform 0.2s;
+
+    &:hover {
+        transform: scale(1.05);
+    }
 `;

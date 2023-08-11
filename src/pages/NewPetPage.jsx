@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import backgroundRegister from '../images/dog6.jpg'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import AuthContext from '../contexts/AuthContext';
+import { useContext } from 'react';
 
 export default function NewPetPage(){
     const navigate = useNavigate();
@@ -12,18 +14,23 @@ export default function NewPetPage(){
     const [about, setAbout] = useState("");
     const [image, setImage] = useState("");
 
+    const authContext = useContext(AuthContext);
+    const { token } = authContext;
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
             await axios.post(`${import.meta.env.VITE_API_URL}/newpet`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                },
                 petName,
                 about,
                 image
-            })
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            
             navigate("/profile");
         } catch (error) {
             console.error('Erro ao cadastrar novo pet:', error);
@@ -112,6 +119,7 @@ const Forms = styled.form`
         font-size: 40px;
         color: #f3b65b;
         text-shadow: 2px 2px 2px #000000;
+        text-align: center;
     }
     a {
         text-decoration: none;

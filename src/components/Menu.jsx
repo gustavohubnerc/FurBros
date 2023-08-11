@@ -1,6 +1,9 @@
-import styled from "styled-components"
-import logo from "../images/FurBros.png"
-import { Link } from "react-router-dom"
+import styled from "styled-components";
+import logo from "../images/FurBros.png";
+import { Link } from "react-router-dom";
+import { IonIcon } from '@ionic/react';
+import { pawOutline, personOutline } from 'ionicons/icons';
+
 
 export default function FixedMenu() {
     const redirectToHome = () => {
@@ -9,43 +12,70 @@ export default function FixedMenu() {
 
     return (
         <Menu>
-            <Content onClick={redirectToHome}>
-                <img alt="logo" src={logo}/>
-            </Content>
-            <Content>
-                <button><Link to="/newpet">Novo pet</Link></button>
-            </Content>  
-            <Content>
-                <button><Link to="/profile">Meu perfil</Link></button>
-            </Content>            
+            <LogoContent onClick={redirectToHome}>
+                <LogoImage src={logo} alt="logo" />
+            </LogoContent>
+            <NavItem>
+                <NavLink to="/newpet">
+                    <IconWrapper>
+                        <IonIcon icon={pawOutline} />
+                    </IconWrapper>
+                    Novo pet
+                </NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink to="/profile">
+                    <IconWrapper>
+                        <IonIcon icon={personOutline} />
+                    </IconWrapper>
+                    Meu perfil
+                </NavLink>
+            </NavItem>
         </Menu>
-    )
+    );
 }
 
+const IconWrapper = styled.span`
+    margin-right: 5px;
+    margin-top: 20px;
+    font-size: 20px;
+`;
+
 const Menu = styled.div`
-    height: 100px;
-    width: 100%;
+    height: 80px;
+    width: 90%;
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    background-color: #F4F0EB;
-`
+    background-color: #2c3e50;
+    padding: 0 20px;
+`;
 
-const Content = styled.div`
+const LogoContent = styled.div`
     display: flex;
+    align-items: center;
+    cursor: pointer;
+`;
 
-    button {
-        border: 3px solid #f3b65b;
-        border-radius: 25px;
-        margin: 10px;
-        font-family: 'Poppins', sans-serif;
-        font-size: 17px;
-        color: #f3b65b;
-        background-color: transparent;
-        padding: 10px;
-        text-decoration: none;
+const LogoImage = styled.img`
+    height: 60px;
+    width: auto;
+`;
+
+const NavItem = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+const NavLink = styled(Link)`
+    text-decoration: none;
+    color: #f4f0eb;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #34495e;
     }
-    a {
-        text-decoration: none;
-        color: #f3b65b;
-    }
-` 
+`;

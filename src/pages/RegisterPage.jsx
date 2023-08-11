@@ -31,7 +31,7 @@ export default function RegisterPage() {
             console.log('Cliente cadastrado com sucesso!');
             navigate("/signin");
         } catch {
-            if(error.response.status === 409){
+            if(error.response && error.response.status === 409){
                 alert("Ja existe um usuario cadastrado com esses dados");
                 return;
             } else {
