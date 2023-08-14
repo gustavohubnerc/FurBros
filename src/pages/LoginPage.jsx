@@ -4,6 +4,7 @@ import axios from 'axios'
 import styled from 'styled-components'
 import backgroundLogin from '../images/dog6.jpg'
 import AuthContext from "../contexts/AuthContext"
+import { Link } from "react-router-dom"
 
 
 export default function LoginPage() {
@@ -18,7 +19,7 @@ export default function LoginPage() {
         e.preventDefault();
 
          try {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/signin`, {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/`, {
                 email,
                 password
             });
@@ -27,7 +28,7 @@ export default function LoginPage() {
             setToken(token);
             localStorage.setItem("token", token);
 
-            navigate("/"); 
+            navigate("/home"); 
         } catch (error) {
             if (error.response.status === 401) {
                 alert("Credenciais inválidas. Por favor, tente novamente.");
@@ -72,6 +73,9 @@ export default function LoginPage() {
                 <button type="submit" onClick={handleSignIn}>
                     Entrar
                 </button>
+                <Link to="/signup">
+                    <h2>Ainda não possui uma conta? Cadastre-se</h2>
+                </Link>
             </Forms>
         </LoginContainer>
     );
@@ -124,5 +128,17 @@ const Forms = styled.form`
         font-size: 40px;
         color: #f3b65b;
         text-shadow: 2px 2px 2px #000000;
+    }
+
+    h2 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 20px;
+        color: #f3b65b;
+        text-shadow: 2px 2px 2px #000000;
+        text-align: center;
+    }
+
+    a {
+        text-decoration: none;
     }
 `;

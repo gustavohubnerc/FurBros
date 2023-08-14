@@ -7,7 +7,7 @@ import { pawOutline, personOutline } from 'ionicons/icons';
 
 export default function FixedMenu() {
     const redirectToHome = () => {
-        window.location.href = '/';
+        window.location.href = '/home';
     };
 
     return (

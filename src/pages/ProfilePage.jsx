@@ -26,13 +26,49 @@ export default function ProfilePage() {
         });
     }, []);
 
+    const togglePetStatus = async (petId, currentStatus) => {
+        try {
+            const newStatus = !currentStatus;
+
+            await axios.put(
+                `${import.meta.env.VITE_API_URL}/updatePetStatus/${petId}`,
+                { active: newStatus },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            setUserPets(prevPets => {
+                return prevPets.map(pet => {
+                    if (pet.id === petId) {
+                        return { ...pet, active: newStatus };
+                    }
+                    return pet;
+                });
+            });
+        } catch (error) {
+            console.error('Erro ao atualizar o status do animal de estimação:', error);
+        }
+    };
+
     return (
         <HomeContainer>
             <FixedMenu />
             <PetCardList>
                 {userPets.map(pet => (
                     <PetCardLink to={`/pets/${pet.id}`} key={pet.id}>
-                        <PetCard pet={pet} />
+                        <PetCard pet={pet} toggleStatus={togglePetStatus} />
+                            <ToggleStatusButton
+                                active={pet.active} 
+                                onClick={e => {
+                                    e.preventDefault();
+                                    togglePetStatus(pet.id, pet.active);
+                                }}
+                            >
+                                {pet.active ? 'Disponível' : 'Férias'}
+                            </ToggleStatusButton>
                     </PetCardLink>
                 ))}
             </PetCardList>
@@ -42,7 +78,7 @@ export default function ProfilePage() {
 
 const HomeContainer = styled.div`
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-color: #F3B555;
 `;
 
@@ -63,4 +99,15 @@ const PetCardLink = styled(Link)`
     &:hover {
         transform: scale(1.05);
     }
+`;
+
+const ToggleStatusButton = styled.button`
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    margin-top: 10px;
+
+    background-color: ${props => (props.active === true ? '#2ecc71' : '#f39c12')};
 `;

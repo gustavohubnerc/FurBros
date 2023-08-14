@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 
-
 export default function PetCard({ pet }) {
     console.log(pet); 
 
     const { petName, image, about, phoneInfo } = pet;
 
     const formatPhone = (phone) => {
-        return phone.replace(/(\d{2})(\d{5})(\d{4})/, "($1)$2-$3");
+        if (phone) {
+            return phone.replace(/(\d{2})(\d{5})(\d{4})/, "($1)$2-$3");
+        } else {
+            return "Telefone não fornecido";
+        }
     };
-       
     
     return (
         <CardContainer>

@@ -17,8 +17,8 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/signup" element={<RegisterPage />} />
-          <Route path="/signin" element={<LoginPage />} />
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/home" element={<HomePage />} />
           <Route path="/newpet" element={<NewPetPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/pets/:id" element={<PetPage />} />

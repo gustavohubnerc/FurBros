@@ -12,7 +12,7 @@ export default function HomePage() {
     const { token } = authContext;
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/home`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

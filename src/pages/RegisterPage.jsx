@@ -29,7 +29,7 @@ export default function RegisterPage() {
         try {
             axios.post(`${import.meta.env.VITE_API_URL}/signup`, saveData);
             console.log('Cliente cadastrado com sucesso!');
-            navigate("/signin");
+            navigate("/");
         } catch {
             if(error.response && error.response.status === 409){
                 alert("Ja existe um usuario cadastrado com esses dados");
