@@ -68,7 +68,7 @@ export default function NewPetPage(){
                     ></input>
                 </label>
                 <button type="submit" onClick={handleSubmit}>
-                    <Link to="/">Finalizar cadastro</Link>
+                    <Link to="/home">Finalizar cadastro</Link>
                 </button>
             </Forms>
         </PageContainer>
